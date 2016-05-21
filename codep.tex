@@ -1,0 +1,133 @@
+
+
+\documentclass[11pt]{article}
+
+\usepackage{drl-common/diagrams}
+\usepackage{multicol}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{stmaryrd}
+\usepackage{drl-common/proof}
+\usepackage{drl-common/typesit}
+\usepackage{drl-common/typescommon}
+\usepackage{drl-common/theorem-envs}
+\usepackage{graphics}
+\usepackage{url}
+\usepackage{relsize}
+\usepackage{fancyvrb}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+
+\usepackage{drl-common/code}
+\DefineVerbatimEnvironment{code}{Verbatim}{fontsize=\small,fontfamily=tt}
+
+
+\title{Codependent Types}
+
+\author{DRL \and PLL \and ER \and MS}
+
+\begin{document}
+
+\maketitle
+
+\section{Cofibrations}
+
+\newcommand\complex[1]{#1 \, \dsd{complex}}
+\newcommand\wfcell[2]{#1 \rightarrowtail #2 \, \dsd{cell}}
+\newcommand\compose[3]{\kappa \, \tptmns{#1}{#2}. {#3}}
+\newcommand\tsubst[2]{#1 [ #2 ]}
+\newcommand\wfsub[3]{#1 \dashv #2 : #3}
+\newcommand\inc{\iota}
+\newcommand\idsub{\dsd{id}}
+\newcommand\esub[3]{#1 , (#2 \mapsto #3)}
+\newcommand\one{\dsd{1}}
+\newcommand\triv{()}
+\newcommand\ofret[3]{#1 \dashv #2 \, : \, #3}
+\newcommand\inco[1]{\inc_1(#1)}
+\newcommand\inct[1]{\inc_2(#1)}
+
+\framebox {$\complex \Psi$}  
+
+\[
+\infer{\complex \cdot}{}
+\qquad
+\infer{\complex{\Psi,x:C}}
+      {\complex \Psi & 
+        \wfcell \Psi C}
+\]
+
+\framebox {$\wfcell \Psi C$} Represents a cofibration $\Psi \rightarrowtail \Psi.C$
+
+\[
+\infer{\wfcell {\Psi_1}{\tsubst{C}{\theta}}}
+      {\wfcell {\Psi_2}{C} &
+       \wfsub {\Psi_1} {\theta} {\Psi_2}}
+\qquad
+\infer{\wfcell {\Psi} \one}{}
+\qquad
+\infer{\wfcell {\Psi} {\compose{x}{C_1}{C_2}} }
+      {\wfcell \Psi {C_1} & 
+        \wfcell {\Psi,\tptm{x}{C_1}} {C_2}}
+\]
+
+Base types like
+\[
+\infer{\wfcell {\tptm{x}{\one},\tptm{y}{\one}} {I(x,y)} }
+      {}
+\]
+
+\framebox {$\wfsub \Psi \theta \Psi'$} Represents a map \emph{from} $\Psi'$ \emph{to} $\Psi$.  
+
+\[
+\infer{\wfsub{\Psi}{\cdot}{\cdot}}{}
+\qquad
+\infer{\wfsub{\Psi}{\esub \theta x c}{\Psi',\tptm{x}{A}}}
+      {\wfsub{\Psi}{\theta}{\Psi'} & 
+       \oftp{\Psi'}{c}{\tsubst{C}{\theta}}
+      }
+\qquad
+\]
+
+Admissible:
+\[
+\infer{{\wfsub{\Psi,\tptm{x}{C}}{\inc}{\Psi}}}{}
+\qquad
+\infer{\wfsub{\Psi}{\idsub}{\Psi}}{}
+\qquad
+\infer{\wfsub{\Psi_1}{\tsubst{\theta_2}{\theta_1}}{\Psi_3}}
+      {\wfsub{\Psi_1}{\theta_1}{\Psi_2} & 
+        \wfsub{\Psi_2}{\theta_2}{\Psi_3} & 
+      }
+\]
+
+\framebox {$\ofret \Psi c C$} Represents a retraction of $\Psi.C$ onto
+$\Psi$, i.e. a retract of $\Psi \rightarrowtail \Psi.C$.  
+
+\[
+\infer{\ofret{\Psi,\tptm{x}{C}}{x}{C}}{}
+\qquad
+\infer{\ofret {\Psi_1}{\tsubst{c}{\theta}}{\tsubst{C}{\theta}}}
+      {\ofret {\Psi_2}{c}{C} &
+       \wfsub {\Psi_1} {\theta} {\Psi_2}}
+\]
+
+\[
+\infer{\oftp \Psi {\triv} \one}{}
+\qquad
+\infer{\ofret {\Psi}{[c_1,c_2]}{\compose{x}{C_1}{C_2}}}
+      {\ofret {\Psi}{c_1}{C_1} &
+        \ofret {\Psi}{c_2}{C_2[c_1/x]} &
+      }
+\]
+
+\[
+\infer{\ofret {\Psi}{\inco{c}}{C_1}}
+      {\ofret {\Psi}{c}{\compose{x}{C_1}{C_2}}}
+\qquad
+\infer{\ofret {\Psi}{\inct{c}}{C_2[\inco{c}/x]}}
+      {\ofret {\Psi}{c}{\compose{x}{C_1}{C_2}}}
+\]
+
+\end{document}

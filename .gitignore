@@ -1,0 +1,10 @@
+Makefile
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.log
+*.toc
+*.ps
+*.pdf
+*.synctex.gz
