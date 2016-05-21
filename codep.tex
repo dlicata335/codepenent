@@ -66,8 +66,6 @@
       {\wfcell {\Psi_2}{C} &
        \wfsub {\Psi_1} {\theta} {\Psi_2}}
 \qquad
-\infer{\wfcell {\Psi} \one}{}
-\qquad
 \infer{\wfcell {\Psi} {\compose{x}{C_1}{C_2}} }
       {\wfcell \Psi {C_1} & 
         \wfcell {\Psi,\tptm{x}{C_1}} {C_2}}
@@ -75,6 +73,8 @@
 
 Base types like
 \[
+\infer{\wfcell {\emptyc} \one}{}
+\qquad
 \infer{\wfcell {\tptm{x}{\one},\tptm{y}{\one}} {I(x,y)} }
       {}
 \]
@@ -115,15 +115,11 @@ $\Psi$, i.e. a retract of $\Psi \rightarrowtail \Psi.C$.
 \]
 
 \[
-\infer{\oftp \Psi {\triv} \one}{}
-\qquad
 \infer{\ofret {\Psi}{[c_1,c_2]}{\compose{x}{C_1}{C_2}}}
       {\ofret {\Psi}{c_1}{C_1} &
         \ofret {\Psi}{c_2}{C_2[c_1/x]} &
       }
-\]
-
-\[
+\qquad
 \infer{\ofret {\Psi}{\inco{c}}{C_1}}
       {\ofret {\Psi}{c}{\compose{x}{C_1}{C_2}}}
 \qquad
@@ -138,8 +134,6 @@ $\Psi$, i.e. a retract of $\Psi \rightarrowtail \Psi.C$.
 
 \item $\Psi,\tptm{x}{C}$ is the codomain of a cofibration $\Psi
   \rightarrowtail \Psi,\tptm{x}{C}$.
-
-\item $\one$ is the unit (1-point) type.  
 
 \item $\wfcell{\Psi}{\tsubst{C}{\theta}}$ is the \emph{pushout} of 
 the cofibration $\Psi' \rightarrowtail (\Psi',\tptm{x}{C})$ 
