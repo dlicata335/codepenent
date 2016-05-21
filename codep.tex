@@ -47,11 +47,12 @@
 \newcommand\ofret[3]{#1 \dashv #2 \, : \, #3}
 \newcommand\inco[1]{\inc_1(#1)}
 \newcommand\inct[1]{\inc_2(#1)}
+\newcommand\emptyc[0]{\emptyset}
 
 \framebox {$\complex \Psi$}  
 
 \[
-\infer{\complex \cdot}{}
+\infer{\complex \emptyc}{}
 \qquad
 \infer{\complex{\Psi,x:C}}
       {\complex \Psi & 
@@ -81,7 +82,7 @@ Base types like
 \framebox {$\wfsub \Psi \theta \Psi'$} Represents a map \emph{from} $\Psi'$ \emph{to} $\Psi$.  
 
 \[
-\infer{\wfsub{\Psi}{\cdot}{\cdot}}{}
+\infer{\wfsub{\Psi}{[]}{\emptyc}}{}
 \qquad
 \infer{\wfsub{\Psi}{\esub \theta x c}{\Psi',\tptm{x}{A}}}
       {\wfsub{\Psi}{\theta}{\Psi'} & 
@@ -106,7 +107,7 @@ Admissible:
 $\Psi$, i.e. a retract of $\Psi \rightarrowtail \Psi.C$.  
 
 \[
-\infer{\ofret{\Psi,\tptm{x}{C}}{x}{C}}{}
+\infer{\ofret{\Psi,\tptm{x}{C},\Psi'}{x}{C}}{}
 \qquad
 \infer{\ofret {\Psi_1}{\tsubst{c}{\theta}}{\tsubst{C}{\theta}}}
       {\ofret {\Psi_2}{c}{C} &
@@ -128,6 +129,19 @@ $\Psi$, i.e. a retract of $\Psi \rightarrowtail \Psi.C$.
 \qquad
 \infer{\ofret {\Psi}{\inct{c}}{C_2[\inco{c}/x]}}
       {\ofret {\Psi}{c}{\compose{x}{C_1}{C_2}}}
+\]
+
+\subsection{Examples}
+
+\newcommand\II[0]{\mathbb{I}}
+
+The endpoint inclusions of the interval:
+\[
+\begin{array}{l}
+\II := \compose{x}{\one}{\compose{y}{\one}{I(x,y)}}\\
+\ofret{\tptm{x}{\II}}{\inco{x}}{\one}\\
+\ofret{\tptm{x}{\II}}{\inco{\inct{x}}}{\one}
+\end{array}
 \]
 
 \end{document}
